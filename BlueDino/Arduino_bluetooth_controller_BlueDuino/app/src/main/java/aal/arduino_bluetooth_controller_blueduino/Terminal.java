@@ -230,7 +230,7 @@ public class Terminal extends AppCompatActivity {
         AlertDialog.Builder alert_builder = new AlertDialog.Builder(Terminal.this);
         View alert_about_view = Terminal.this.getLayoutInflater().inflate(R.layout.alert_about, null);
 
-        String version = BuildConfig.VERSION_NAME;
+        String version = ""; // BuildConfig.VERSION_NAME;
         String[] developers     = getResources().getStringArray(R.array.developers);
         String[] translators    = getResources().getStringArray(R.array.translators);
 

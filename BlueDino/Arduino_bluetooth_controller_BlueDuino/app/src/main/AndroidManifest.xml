@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="aal.arduino_bluetooth_controller_blueduino">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+
 
     <application
         android:allowBackup="true"
@@ -15,6 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".BluetoothConnection"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +28,7 @@
         </activity>
         <activity
             android:name=".Devices"
+            android:exported="false"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -35,6 +40,7 @@
         </activity>
         <activity
             android:name=".Mode"
+            android:exported="false"
             android:label="@string/title_activity_mode"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -46,6 +52,7 @@
         </activity>
         <activity
             android:name=".Terminal"
+            android:exported="false"
             android:label="@string/title_activity_terminal"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
@@ -58,6 +65,7 @@
         </activity>
         <activity
             android:name=".Analog"
+            android:exported="false"
             android:label="@string/title_activity_analog"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -69,6 +77,7 @@
         </activity>
         <activity
             android:name=".Digital"
+            android:exported="false"
             android:label="@string/title_activity_digital"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -80,6 +89,7 @@
         </activity>
         <activity
             android:name=".Joystick"
+            android:exported="false"
             android:label="@string/title_activity_joystick"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/AppTheme.NoActionBar">
@@ -91,6 +101,7 @@
         </activity>
         <activity
             android:name=".JoystickConfigure"
+            android:exported="false"
             android:label="@string/title_activity_joystick_configure"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
@@ -103,6 +114,7 @@
         </activity>
         <activity
             android:name=".GlobalSettings"
+            android:exported="false"
             android:label="@string/title_activity_global_settings"
             android:screenOrientation="portrait">
             <intent-filter>

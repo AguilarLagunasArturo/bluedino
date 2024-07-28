@@ -29,6 +29,7 @@
     <!-- BluetoothConnection.java -->
     <string name="title_activity_bluetooth_connection">BlueDuino</string> <!-- No modificar -->
     <string name="bt_unable">Votre diapositifs ne peut pas utiliser Bluetooth</string>
+    <string name="bt_not_granted">Les autorisations Bluetooth n\'ont pas été accordées</string>
 
     <!-- Mode.java -->
     <string name="title_activity_mode">Sélectionner un mode</string>

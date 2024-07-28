@@ -29,6 +29,7 @@
     <!-- BluetoothConnection.java -->
     <string name="title_activity_bluetooth_connection">BlueDuino</string> <!-- No modificar -->
     <string name="bt_unable">Tu dispositivo no puede usar bluetooth</string>
+    <string name="bt_not_granted">Permisos bluetooth no fueron otorgados</string>
 
     <!-- Mode.java -->
     <string name="title_activity_mode">Selecciona un modo</string>

@@ -1,29 +1,46 @@
 package aal.arduino_bluetooth_controller_blueduino;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 public class BluetoothConnection extends AppCompatActivity {
     private String TAG = "BluetoothConnection";
 
     // ** Variables **
-    BluetoothAdapter bt;
+    private static final int REQUEST_CODE_PERMISSIONS = 1001;
+    private static final String[] REQUIRED_PERMISSIONS = {
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false)){
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false)) {
             AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_YES
             );
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_NO
             );
@@ -34,8 +51,36 @@ public class BluetoothConnection extends AppCompatActivity {
 
         setTitle(R.string.title_activity_bluetooth_connection);
         setContentView(R.layout.activity_bluetooth_connection);
-        bt = BluetoothAdapter.getDefaultAdapter();
-        try_to_enable_bt();
+
+        if (allPermissionsGranted(REQUIRED_PERMISSIONS)) {
+            open(Devices.class);
+        } else {
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+        }
+
+    }
+
+    private boolean allPermissionsGranted(String[] permissions) {
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted(REQUIRED_PERMISSIONS)) {
+                open(Devices.class);
+            } else {
+                Toast.makeText(BluetoothConnection.this, R.string.bt_not_granted, Toast.LENGTH_SHORT).show();
+                BluetoothConnection.this.finish();
+            }
+        }
     }
 
     @Override
@@ -54,38 +99,6 @@ public class BluetoothConnection extends AppCompatActivity {
         GlobalVariables.activity_on[0] = false;
         if (GlobalVariables.is_app_in_foreground())
             Log.d(TAG, "===============APP IN FOREGROUND===============");
-    }
-
-    // ** Enable bluetooth **
-    public static int BLUETOOTH_ENABLED = 1;
-    private void try_to_enable_bt() {
-        if (bt == null){
-            Log.d(TAG, "Device unable to use bluetooth");
-            Toast.makeText(BluetoothConnection.this, R.string.bt_unable, Toast.LENGTH_SHORT).show();
-            this.finish();
-        }else if (bt.isEnabled()){
-            Log.d(TAG, "Bluetooth enabled.");
-            open(Devices.class);
-        }else{
-            Log.d(TAG, "Needs to enable bluetooth.");
-            Intent enable_bt = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enable_bt, BLUETOOTH_ENABLED);
-        }
-    }
-
-    // ** Ensure that user enabled bluetooth **
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == BLUETOOTH_ENABLED){
-            if (resultCode == RESULT_OK) {
-                Log.d(TAG, "User: OK");
-                open(Devices.class);
-            } else if (resultCode == RESULT_CANCELED){
-                Log.d(TAG, "User: CANCELED");
-                BluetoothConnection.this.finish();
-            }
-        }
     }
 
     // ** This opens activities **
