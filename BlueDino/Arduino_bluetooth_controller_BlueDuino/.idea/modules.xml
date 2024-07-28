@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Arduino_bluetooth_controller_BlueDuino.iml" filepath="$PROJECT_DIR$/.idea/Arduino_bluetooth_controller_BlueDuino.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Arduino_bluetooth_controller_BlueDuino.iml" filepath="$PROJECT_DIR$/.idea/modules/Arduino_bluetooth_controller_BlueDuino.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Arduino_bluetooth_controller_BlueDuino.app.unitTest.iml" />
     </modules>
   </component>
 </project>
